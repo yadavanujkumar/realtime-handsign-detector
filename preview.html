@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Sign Detector - Demo Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            min-height: 100vh;
+            backdrop-filter: blur(10px);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .video-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-accent {
+            background: #28a745;
+            color: white;
+        }
+
+        .results-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .detection-results,
+        .hand-signs-guide {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .detection-results h3,
+        .hand-signs-guide h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.3rem;
+        }
+
+        .results-container {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 15px;
+            min-height: 100px;
+            border-left: 4px solid #007bff;
+        }
+
+        .detection-item {
+            background: white;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid #28a745;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hand-sign {
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .confidence {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .signs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .sign-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .sign-item:hover {
+            transform: translateY(-2px);
+            background: #e9ecef;
+        }
+
+        .sign-emoji {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .sign-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+        }
+
+        .integration-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .integration-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .integration-options {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #007bff;
+            border: 2px solid #007bff;
+            text-decoration: none;
+        }
+
+        .btn-outline:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        .status-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 1000;
+        }
+
+        .demo-note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #856404;
+        }
+
+        .demo-note strong {
+            color: #533f03;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤟 Realtime Hand Sign Detector</h1>
+            <p>Detect and recognize hand signs in real-time using AI</p>
+        </header>
+
+        <div class="demo-note">
+            <strong>Demo Preview:</strong> This is a static preview of the interface. Install dependencies and run the server for full functionality.
+        </div>
+
+        <main>
+            <div class="video-section">
+                <div class="video-container">
+                    📹 Camera Feed (Demo Mode)
+                    <br>
+                    <small>Enable camera when server is running</small>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn btn-primary">Start Detection</button>
+                    <button class="btn btn-secondary">Stop Detection</button>
+                    <button class="btn btn-accent">Capture Frame</button>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="detection-results">
+                    <h3>Detection Results</h3>
+                    <div class="results-container">
+                        <div class="detection-item">
+                            <div>
+                                <span class="hand-sign">👍 thumbs up</span>
+                            </div>
+                            <div class="confidence">
+                                95%
+                            </div>
+                        </div>
+                        <div class="detection-item">
+                            <div>
+                                <span class="hand-sign">✌️ peace</span>
+                            </div>
+                            <div class="confidence">
+                                88%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hand-signs-guide">
+                    <h3>Supported Hand Signs</h3>
+                    <div class="signs-grid">
+                        <div class="sign-item">
+                            <span class="sign-emoji">👍</span>
+                            <span class="sign-name">Thumbs Up</span>
+                        </div>
+                        <div class="sign-item">
+                            <span class="sign-emoji">👎</span>
+                            <span class="sign-name">Thumbs Down</span>
+                        </div>
+                        <div class="sign-item">
+                            <span class="sign-emoji">✌️</span>
+                            <span class="sign-name">Peace</span>
+                        </div>
+                        <div class="sign-item">
+                            <span class="sign-emoji">👌</span>
+                            <span class="sign-name">OK</span>
+                        </div>
+                        <div class="sign-item">
+                            <span class="sign-emoji">✊</span>
+                            <span class="sign-name">Fist</span>
+                        </div>
+                        <div class="sign-item">
+                            <span class="sign-emoji">🖐️</span>
+                            <span class="sign-name">Open Palm</span>
+                        </div>
+                        <div class="sign-item">
+                            <span class="sign-emoji">👉</span>
+                            <span class="sign-name">Pointing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="integration-section">
+            <h3>🔌 Plugin Integration</h3>
+            <p>Use this detector as a plugin in your video conferencing apps:</p>
+            <div class="integration-options">
+                <a href="#plugin" class="btn btn-outline">Plugin Demo</a>
+                <a href="#api-docs" class="btn btn-outline">API Documentation</a>
+                <a href="https://github.com/yadavanujkumar/realtime-handsign-detector" class="btn btn-outline">GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status indicator -->
+    <div class="status-indicator">
+        <span>Demo Mode</span>
+    </div>
+
+    <script>
+        // Demo functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🤟 Hand Sign Detector Demo Loaded');
+            console.log('To run the full version:');
+            console.log('1. pip install -r requirements.txt');
+            console.log('2. python app.py');
+            console.log('3. Open http://localhost:5000');
+        });
+    </script>
+</body>
+</html>

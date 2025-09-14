@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Sign Detector Plugin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .plugin-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .plugin-demo {
+            border: 2px dashed #007bff;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .integration-code {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="plugin-container">
+        <header>
+            <h1>🔌 Hand Sign Detector Plugin</h1>
+            <p>Integrate hand sign detection into your video conferencing app</p>
+        </header>
+
+        <div class="plugin-demo">
+            <h3>Live Demo</h3>
+            <div class="video-container" style="max-width: 400px; margin: 0 auto;">
+                <video id="pluginVideo" autoplay muted style="width: 100%; border-radius: 8px;"></video>
+                <canvas id="pluginCanvas" style="position: absolute; top: 0; left: 0;"></canvas>
+            </div>
+            
+            <div class="controls" style="margin-top: 15px;">
+                <button id="pluginStartBtn" class="btn btn-primary">Start Plugin</button>
+                <button id="pluginStopBtn" class="btn btn-secondary" disabled>Stop Plugin</button>
+            </div>
+
+            <div id="pluginResults" style="margin-top: 15px;">
+                <p class="no-results">Plugin ready - start detection to see results</p>
+            </div>
+        </div>
+
+        <div class="integration-guide">
+            <h3>🚀 Quick Integration</h3>
+            
+            <h4>1. Include the SDK</h4>
+            <div class="integration-code">
+&lt;script src="https://yourserver.com/static/js/handsign-sdk.js"&gt;&lt;/script&gt;
+            </div>
+
+            <h4>2. Initialize the detector</h4>
+            <div class="integration-code">
+const handDetector = new HandSignDetector({
+    serverUrl: 'https://yourserver.com',
+    onDetection: (results) => {
+        console.log('Hand signs detected:', results);
+        // Handle detection results
+    }
+});
+            </div>
+
+            <h4>3. Start detection with your video stream</h4>
+            <div class="integration-code">
+// Get video element from your app
+const videoElement = document.getElementById('yourVideoElement');
+
+// Start detection
+handDetector.startDetection(videoElement);
+
+// Stop detection
+handDetector.stopDetection();
+            </div>
+
+            <h4>4. Handle detection events</h4>
+            <div class="integration-code">
+handDetector.on('thumbs_up', () => {
+    console.log('User gave thumbs up!');
+    // Show reaction, send emoji, etc.
+});
+
+handDetector.on('peace', () => {
+    console.log('Peace sign detected!');
+    // Add peace emoji to chat
+});
+            </div>
+        </div>
+
+        <div class="platform-integration">
+            <h3>📱 Platform Integration Examples</h3>
+            
+            <div class="platform-example">
+                <h4>Zoom App Integration</h4>
+                <div class="integration-code">
+// Zoom Apps SDK integration
+import zoomSdk from '@zoom/appssdk';
+import { HandSignDetector } from './handsign-sdk.js';
+
+const detector = new HandSignDetector({
+    serverUrl: 'your-server-url'
+});
+
+// Get Zoom video stream
+zoomSdk.getVideoStream().then(stream => {
+    detector.startDetection(stream);
+});
+                </div>
+            </div>
+
+            <div class="platform-example">
+                <h4>Microsoft Teams Integration</h4>
+                <div class="integration-code">
+// Teams SDK integration
+import * as microsoftTeams from "@microsoft/teams-js";
+import { HandSignDetector } from './handsign-sdk.js';
+
+microsoftTeams.initialize(() => {
+    const detector = new HandSignDetector({
+        serverUrl: 'your-server-url'
+    });
+    
+    // Integrate with Teams video
+    detector.startDetection(videoElement);
+});
+                </div>
+            </div>
+
+            <div class="platform-example">
+                <h4>Google Meet Integration</h4>
+                <div class="integration-code">
+// Chrome extension for Google Meet
+chrome.tabs.executeScript({
+    code: `
+        const detector = new HandSignDetector({
+            serverUrl: 'your-server-url'
+        });
+        
+        // Find Meet video element
+        const videoElement = document.querySelector('video[autoplay]');
+        if (videoElement) {
+            detector.startDetection(videoElement);
+        }
+    `
+});
+                </div>
+            </div>
+        </div>
+
+        <div class="api-documentation">
+            <h3>📖 API Documentation</h3>
+            
+            <h4>REST API</h4>
+            <div class="integration-code">
+POST /api/detect
+Content-Type: application/json
+
+{
+    "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQ..."
+}
+
+Response:
+{
+    "success": true,
+    "results": {
+        "hands_detected": 1,
+        "hand_signs": [
+            {
+                "hand_index": 0,
+                "sign": "thumbs_up",
+                "confidence": 0.95
+            }
+        ],
+        "landmarks": [...]
+    }
+}
+            </div>
+
+            <h4>WebSocket API</h4>
+            <div class="integration-code">
+// Connect to WebSocket
+const socket = io('https://yourserver.com');
+
+// Send frame for detection
+socket.emit('detect_frame', {
+    image: 'data:image/jpeg;base64,...',
+    timestamp: Date.now()
+});
+
+// Receive results
+socket.on('detection_result', (data) => {
+    if (data.success) {
+        console.log('Detection results:', data.results);
+    }
+});
+            </div>
+        </div>
+
+        <div class="back-to-main">
+            <a href="/" class="btn btn-outline">← Back to Main Demo</a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='js/plugin.js') }}"></script>
+</body>
+</html>

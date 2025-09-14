@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realtime Hand Sign Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤟 Realtime Hand Sign Detector</h1>
+            <p>Detect and recognize hand signs in real-time using AI</p>
+        </header>
+
+        <main>
+            <div class="video-section">
+                <div class="video-container">
+                    <video id="videoElement" autoplay muted></video>
+                    <canvas id="overlayCanvas"></canvas>
+                </div>
+                
+                <div class="controls">
+                    <button id="startBtn" class="btn btn-primary">Start Detection</button>
+                    <button id="stopBtn" class="btn btn-secondary" disabled>Stop Detection</button>
+                    <button id="captureBtn" class="btn btn-accent">Capture Frame</button>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="detection-results">
+                    <h3>Detection Results</h3>
+                    <div id="resultsContainer">
+                        <p class="no-results">No hands detected</p>
+                    </div>
+                </div>
+
+                <div class="hand-signs-guide">
+                    <h3>Supported Hand Signs</h3>
+                    <div class="signs-grid">
+                        <div class="sign-item">
+                            <span class="sign-emoji">👍</span>
+                            <span class="sign-name">Thumbs Up</span>
+                        </div>
+                        <div class="sign-item">
+                            <span class="sign-emoji">👎</span>
+                            <span class="sign-name">Thumbs Down</span>
+                        </div>
+                        <div class="sign-item">
+                            <span class="sign-emoji">✌️</span>
+                            <span class="sign-name">Peace</span>
+                        </div>
+                        <div class="sign-item">
+                            <span class="sign-emoji">👌</span>
+                            <span class="sign-name">OK</span>
+                        </div>
+                        <div class="sign-item">
+                            <span class="sign-emoji">✊</span>
+                            <span class="sign-name">Fist</span>
+                        </div>
+                        <div class="sign-item">
+                            <span class="sign-emoji">🖐️</span>
+                            <span class="sign-name">Open Palm</span>
+                        </div>
+                        <div class="sign-item">
+                            <span class="sign-emoji">👉</span>
+                            <span class="sign-name">Pointing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="integration-section">
+                <h3>🔌 Plugin Integration</h3>
+                <p>Use this detector as a plugin in your video conferencing apps:</p>
+                <div class="integration-options">
+                    <a href="/plugin" class="btn btn-outline">Plugin Demo</a>
+                    <a href="#api-docs" class="btn btn-outline">API Documentation</a>
+                    <a href="https://github.com/yadavanujkumar/realtime-handsign-detector" class="btn btn-outline">GitHub</a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Realtime Hand Sign Detector | Built with MediaPipe & Flask</p>
+        </footer>
+    </div>
+
+    <!-- Status indicator -->
+    <div id="statusIndicator" class="status-indicator">
+        <span id="statusText">Disconnected</span>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
