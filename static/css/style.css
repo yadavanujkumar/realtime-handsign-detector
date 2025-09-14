@@ -39,6 +39,25 @@ header h1 {
 header p {
     font-size: 1.2rem;
     color: #666;
+    margin-bottom: 15px;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.stat-item {
+    background: rgba(102, 126, 234, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4c63d2;
+    border: 2px solid rgba(102, 126, 234, 0.2);
 }
 
 /* Main content layout */
@@ -216,10 +235,44 @@ main {
 }
 
 /* Hand signs guide */
+.hand-signs-guide {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.signs-category {
+    margin-bottom: 30px;
+}
+
+.signs-category:last-child {
+    margin-bottom: 0;
+}
+
+.signs-category h4 {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e9ecef;
+    font-weight: 600;
+}
+
 .signs-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 15px;
+}
+
+.alphabet-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+}
+
+.numbers-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 12px;
 }
 
 .sign-item {
@@ -227,14 +280,25 @@ main {
     flex-direction: column;
     align-items: center;
     padding: 15px;
-    background: #f8f9fa;
+    background: white;
     border-radius: 8px;
-    transition: transform 0.2s ease;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .sign-item:hover {
     transform: translateY(-2px);
-    background: #e9ecef;
+    border-color: rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.alphabet-grid .sign-item {
+    padding: 10px;
+}
+
+.numbers-grid .sign-item {
+    padding: 12px;
 }
 
 .sign-emoji {
@@ -242,11 +306,26 @@ main {
     margin-bottom: 8px;
 }
 
+.alphabet-grid .sign-emoji {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.numbers-grid .sign-emoji {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+}
+
 .sign-name {
     font-size: 0.9rem;
     font-weight: 600;
     color: #333;
     text-align: center;
+}
+
+.alphabet-grid .sign-name,
+.numbers-grid .sign-name {
+    font-size: 0.8rem;
 }
 
 /* Integration section */

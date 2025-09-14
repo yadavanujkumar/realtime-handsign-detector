@@ -298,6 +298,7 @@ class HandSignDetectorApp {
     
     getSignEmoji(sign) {
         const emojiMap = {
+            // Basic gestures
             'thumbs_up': '👍',
             'thumbs_down': '👎',
             'peace': '✌️',
@@ -305,6 +306,23 @@ class HandSignDetectorApp {
             'fist': '✊',
             'open_palm': '🖐️',
             'pointing': '👉',
+            
+            // ASL Alphabet
+            'A': '🅰️', 'B': '🅱️', 'C': '🔤', 'D': '🔤', 'E': '🔤',
+            'F': '🔤', 'G': '🔤', 'H': '🔤', 'I': '🔤', 'J': '🔤',
+            'K': '🔤', 'L': '🤟', 'M': '🔤', 'N': '🔤', 'O': '⭕',
+            'P': '🔤', 'Q': '🔤', 'R': '🔤', 'S': '🔤', 'T': '🔤',
+            'U': '🔤', 'V': '✌️', 'W': '🔤', 'X': '🔤', 'Y': '🤙', 'Z': '🔤',
+            
+            // ASL Numbers
+            '0': '⭕', '1': '☝️', '2': '✌️', '3': '🔢', '4': '🔢',
+            '5': '🖐️', '6': '🔢', '7': '🔢', '8': '🔢', '9': '🔢',
+            
+            // Common ASL words
+            'hello': '👋', 'goodbye': '👋', 'thank_you': '🙏',
+            'please': '🙏', 'sorry': '😔', 'love': '❤️',
+            'yes': '✅', 'no': '❌',
+            
             'unknown': '❓'
         };
         return emojiMap[sign] || '❓';

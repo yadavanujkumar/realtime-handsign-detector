@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realtime Hand Sign Detector</title>
+    <title>Complete ASL Hand Sign Detector</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🤟 Realtime Hand Sign Detector</h1>
-            <p>Detect and recognize hand signs in real-time using AI</p>
+            <h1>🤟 Complete ASL Hand Sign Detector</h1>
+            <p>Detect and recognize complete American Sign Language alphabet, numbers, and gestures in real-time using AI</p>
+            <div class="stats">
+                <span class="stat-item">📚 51 Signs Supported</span>
+                <span class="stat-item">🔤 26 ASL Letters</span>
+                <span class="stat-item">🔢 10 Numbers</span>
+                <span class="stat-item">💬 8 Common Words</span>
+            </div>
         </header>
 
         <main>
@@ -37,34 +43,104 @@
 
                 <div class="hand-signs-guide">
                     <h3>Supported Hand Signs</h3>
-                    <div class="signs-grid">
-                        <div class="sign-item">
-                            <span class="sign-emoji">👍</span>
-                            <span class="sign-name">Thumbs Up</span>
+                    
+                    <!-- Basic Gestures -->
+                    <div class="signs-category">
+                        <h4>Basic Gestures</h4>
+                        <div class="signs-grid">
+                            <div class="sign-item">
+                                <span class="sign-emoji">👍</span>
+                                <span class="sign-name">Thumbs Up</span>
+                            </div>
+                            <div class="sign-item">
+                                <span class="sign-emoji">👎</span>
+                                <span class="sign-name">Thumbs Down</span>
+                            </div>
+                            <div class="sign-item">
+                                <span class="sign-emoji">✌️</span>
+                                <span class="sign-name">Peace</span>
+                            </div>
+                            <div class="sign-item">
+                                <span class="sign-emoji">👌</span>
+                                <span class="sign-name">OK</span>
+                            </div>
+                            <div class="sign-item">
+                                <span class="sign-emoji">✊</span>
+                                <span class="sign-name">Fist</span>
+                            </div>
+                            <div class="sign-item">
+                                <span class="sign-emoji">🖐️</span>
+                                <span class="sign-name">Open Palm</span>
+                            </div>
+                            <div class="sign-item">
+                                <span class="sign-emoji">👉</span>
+                                <span class="sign-name">Pointing</span>
+                            </div>
                         </div>
-                        <div class="sign-item">
-                            <span class="sign-emoji">👎</span>
-                            <span class="sign-name">Thumbs Down</span>
+                    </div>
+
+                    <!-- ASL Alphabet -->
+                    <div class="signs-category">
+                        <h4>ASL Alphabet (A-Z)</h4>
+                        <div class="signs-grid alphabet-grid">
+                            <div class="sign-item"><span class="sign-emoji">🅰️</span><span class="sign-name">A</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🅱️</span><span class="sign-name">B</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">C</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">D</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">E</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">F</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">G</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">H</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">I</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">J</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">K</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🤟</span><span class="sign-name">L</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">M</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">N</span></div>
+                            <div class="sign-item"><span class="sign-emoji">⭕</span><span class="sign-name">O</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">P</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">Q</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">R</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">S</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">T</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">U</span></div>
+                            <div class="sign-item"><span class="sign-emoji">✌️</span><span class="sign-name">V</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">W</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">X</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🤙</span><span class="sign-name">Y</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔤</span><span class="sign-name">Z</span></div>
                         </div>
-                        <div class="sign-item">
-                            <span class="sign-emoji">✌️</span>
-                            <span class="sign-name">Peace</span>
+                    </div>
+
+                    <!-- ASL Numbers -->
+                    <div class="signs-category">
+                        <h4>ASL Numbers (0-9)</h4>
+                        <div class="signs-grid numbers-grid">
+                            <div class="sign-item"><span class="sign-emoji">⭕</span><span class="sign-name">0</span></div>
+                            <div class="sign-item"><span class="sign-emoji">☝️</span><span class="sign-name">1</span></div>
+                            <div class="sign-item"><span class="sign-emoji">✌️</span><span class="sign-name">2</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔢</span><span class="sign-name">3</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔢</span><span class="sign-name">4</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🖐️</span><span class="sign-name">5</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔢</span><span class="sign-name">6</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔢</span><span class="sign-name">7</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔢</span><span class="sign-name">8</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🔢</span><span class="sign-name">9</span></div>
                         </div>
-                        <div class="sign-item">
-                            <span class="sign-emoji">👌</span>
-                            <span class="sign-name">OK</span>
-                        </div>
-                        <div class="sign-item">
-                            <span class="sign-emoji">✊</span>
-                            <span class="sign-name">Fist</span>
-                        </div>
-                        <div class="sign-item">
-                            <span class="sign-emoji">🖐️</span>
-                            <span class="sign-name">Open Palm</span>
-                        </div>
-                        <div class="sign-item">
-                            <span class="sign-emoji">👉</span>
-                            <span class="sign-name">Pointing</span>
+                    </div>
+
+                    <!-- Common ASL Words -->
+                    <div class="signs-category">
+                        <h4>Common ASL Words</h4>
+                        <div class="signs-grid">
+                            <div class="sign-item"><span class="sign-emoji">👋</span><span class="sign-name">Hello</span></div>
+                            <div class="sign-item"><span class="sign-emoji">👋</span><span class="sign-name">Goodbye</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🙏</span><span class="sign-name">Thank You</span></div>
+                            <div class="sign-item"><span class="sign-emoji">🙏</span><span class="sign-name">Please</span></div>
+                            <div class="sign-item"><span class="sign-emoji">😔</span><span class="sign-name">Sorry</span></div>
+                            <div class="sign-item"><span class="sign-emoji">❤️</span><span class="sign-name">Love</span></div>
+                            <div class="sign-item"><span class="sign-emoji">✅</span><span class="sign-name">Yes</span></div>
+                            <div class="sign-item"><span class="sign-emoji">❌</span><span class="sign-name">No</span></div>
                         </div>
                     </div>
                 </div>
